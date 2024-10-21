@@ -4,6 +4,7 @@ import Signin from "./components/Signin";
 import Home from "./components/Home";
 import { useEffect, useState } from "react";
 import axios from "./api/axios";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -19,6 +20,8 @@ function App() {
           console.log("User Data ->", userData);
           const token = userData.token;
           localStorage.setItem("token", token);
+          const username = userData.username;
+          localStorage("username", username);
         }
         else{
           console.log("No user found");
@@ -31,11 +34,13 @@ function App() {
   }, []);
 
   return (
+    
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
-        <Route path="/" element={<Home userData={userData} />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </Router>
   );
